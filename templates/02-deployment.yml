@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mydeployment
+  name: mydeployment
+  namespace: {{ $.Values.namespace }} 
+spec:
+  replicas: {{ $.Values.replicas }}
+  selector:
+    matchLabels:
+      app: mydeployment
+  strategy: {}
+  template:
+    metadata:
+      namespace: {{ $.Values.namespace }} 
+      creationTimestamp: null
+      labels:
+        app: mydeployment
+    spec:
+      serviceAccountName: my-priv-sa
+      containers:
+      - image: quay.io/redhattraining/hello-world-nginx
+        name: nginx 
+        resources: {}
+status: {}
